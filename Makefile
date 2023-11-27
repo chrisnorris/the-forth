@@ -1,8 +1,5 @@
 # this is Virgil's work; see https://git.sr.ht/~vdupras/tumbleforth
 
-buckleupcc: buckleup.c
-	$(CC) -o $@ buckleup.c
-
 noop: noop.asm
 	nasm -f elf64 noop.asm
 	ld -o $@ noop.o
@@ -10,14 +7,6 @@ noop: noop.asm
 buckleup: buckleup.asm
 	nasm -f elf64 buckleup.asm
 	ld -o $@ buckleup.o
-
-.PHONY: runcc
-runcc: buckleupcc
-	./buckleupcc; echo $$?
-
-.PHONY: discc
-discc: buckleup
-	objdump -d buckleupcc
 
 .PHONY: runnoop
 runnoop: noop
