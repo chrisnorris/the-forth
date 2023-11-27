@@ -12,10 +12,17 @@ buckleup: buckleup.asm
 runnoop: noop
 	./noop
 
-.PHONY: run
+.PHONY: runbuckle
 run: buckleup
 	./buckleup; echo $$?
 
 .PHONY: dis
 dis: buckleup
 	objdump -d buckleup
+
+hello.img: hello.asm
+	nasm -o $@ hello.asm
+
+.PHONY: runhello
+run: hello.img
+	qemu-system-i386 -hda hello.img
